@@ -1,0 +1,17 @@
+{
+  "name": "serverless_function",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "emulate": "firebase emulators:start --only functions",
+    "deploy": "firebase deploy --only functions"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "firebase": "^12.8.0",
+    "firebase-admin": "^13.6.0",
+    "firebase-functions": "^7.0.5",
+    "zod": "^4.3.6"
+  }
+}
