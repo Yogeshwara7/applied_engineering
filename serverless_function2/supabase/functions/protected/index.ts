@@ -2,20 +2,20 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 Deno.serve(async(req)=>{
 
-  const authHeader = req.Header.get("Authorization");
+  const authHeader = req.headers.get("Authorization");
 
   if(!authHeader){
     return new Response("Missing Authentication Header", {status:401});
   }
 
-  const token= authHeader.replace("Bearer" ,"");
+  const token= authHeader.replace("Bearer " ,"");
 
   const supabase = createClient(
-    Deno.env.get("Supabase_URL") ?? "",
-    Deno.env.get("Published_Key")?? ""
+    Deno.env.get("SUPABASE_URL") ?? "",
+    Deno.env.get("coM_SUPABASE_ANON_KEY")?? ""
   );
 
-  const result= supabase.auth.getUser(token);
+  const result= await supabase.auth.getUser(token);
   const user = result.data.user;
   const error = result.error;
 
@@ -24,12 +24,12 @@ Deno.serve(async(req)=>{
   }
 
   return new Response(
-    JSON.stringif({
+    JSON.stringifY({
       message:"Your authenitcated",
       email: user.email,
       id:user.id
     }),
-    {headers:{"ContentType": "application/json"}}
+    {headers:{"Content-Type": "application/json"}}
   );
 
 
