@@ -9,10 +9,16 @@ async function initDB() {
             customer_name VARCHAR(100) NOT NULL,
             phone VARCHAR(20) NOT NULL,
             service_type VARCHAR(50) NOT NULL,
-            status ENUM('pending', 'accepted', 'completed', 'cancelled') 
-            NOT NULL DEFAULT 'pending',
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        )
+            address VARCHAR(200) NOT NULL,
+            pickup_date DATETIME NOT NULL,
+            kg DECIMAL(5,2) NULL,
+            price DECIMAL(10,2) NULL,
+            status ENUM('Pending', 'Accepted', 'Completed', 'Rejected') 
+            NOT NULL DEFAULT 'Pending',
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
+            ON UPDATE CURRENT_TIMESTAMP
+            )
         `)
     }
     catch(error){
