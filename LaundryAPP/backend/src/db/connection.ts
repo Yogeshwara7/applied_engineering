@@ -5,8 +5,8 @@ const pool = mysql.createPool ({
     password : "secret",
     host : "localhost",
     database: "laundry",
-    port:3307,
-    waitForConnection:true,
+    port:3306,
+    waitForConnections:true,
     connectionLimit:10,
 });
 

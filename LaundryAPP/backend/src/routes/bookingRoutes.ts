@@ -1,7 +1,7 @@
-import createBooking from "../controllers/bookingController";
-import Router from "express";
+import { createBooking } from "../controllers/bookingController";
+import { Router } from "express";
 
-const router = Router;
+const router = Router();
 
 router.post("/",createBooking);
 

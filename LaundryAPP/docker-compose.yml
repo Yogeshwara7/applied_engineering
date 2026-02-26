@@ -3,10 +3,10 @@ version: "3.8"
 services:
   mysql:
     image: mysql:8.0
-    container_name: laundry_mysql
+    container_name: mysql-laundry
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_ROOT_PASSWORD: secret
       MYSQL_DATABASE: laundry
     ports:
       - "3307:3306"
