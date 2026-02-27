@@ -10,6 +10,7 @@ async function server() {
     await initDB();
 
     app.use("/api/booking", bookingRoute);
+    
     app.listen(3000, () =>{
         console.log("server started on 3000");
     })
