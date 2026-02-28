@@ -1,18 +1,26 @@
-import getBookings from "..api/getBookings";
-import {useState, useEffect} from "react";
+import getBookings from "../api/bookingApi";
+import { useState, useEffect } from "react";
+import BookingForm from "../components/BookingForm";
 
 export default function Bookings() {
-    const[bookings, setbookings]= useState([]);
-
-    useEffect(() => {
-      const fetchData=async () => {
-        const data=await getBookings();
-        setbookings(data);
+    const [bookings, setBookings] = useState([]);
+const fetchData=async () => {
+        const data = await getBookings();
+        setBookings(data);
         };
+    useEffect(() => {
         fetchData();
     },[] );
     
-    return(
-        
-    )
+    return (
+        <>
+        <BookingForm onBookingCreated={fetchData}/>
+          {bookings.map((booking: any) => (
+            <div key={booking.id}>
+              <p>Name : {booking.customer_name}</p>
+              <p>Status: {booking.status}</p>
+            </div>
+          ))}
+        </>
+    );
 }

@@ -1,15 +1,18 @@
 import axios from "axios";
 
 const Api = axios.create({
-    baseURL: import.meta.env.VITE_API_URL;
+    baseURL: import.meta.env.VITE_API_URL,
 });
 
-export const getbookings = async () => {
-    const response = await Api.get("/api/getbookings");
+export const getBookings = async () => {
+    const response = await Api.get("/api/booking");
     return response.data;
 };
 
-export const createBooking = async () => {
-    const response = await Api.post("/api/createBooking" , data);
+// also provide a default export for convenience
+export default getBookings;
+
+export const createBooking = async (data: any) => {
+    const response = await Api.post("/api/booking", data);
     return response.data;
 };
