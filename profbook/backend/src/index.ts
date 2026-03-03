@@ -2,7 +2,7 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-import { error } from "node:console";
+import authRoutes from "./routes/authRoutes";
 
 
 const app=express();
@@ -17,6 +17,8 @@ async function server() {
         app.get("/", (req,res)=>{
             res.json({message:"ProfBook API is running"})
         })
+        app.use("/api/auth", authRoutes);
+
         app.listen(process.env.PORT, ()=>{
         console.log("Server started");
     })
