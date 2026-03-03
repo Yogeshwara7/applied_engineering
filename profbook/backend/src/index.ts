@@ -3,6 +3,7 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import authRoutes from "./routes/authRoutes";
+import timeSlotRoutes from "./routes/timeSlotRoutes";
 
 
 const app=express();
@@ -18,6 +19,7 @@ async function server() {
             res.json({message:"ProfBook API is running"})
         })
         app.use("/api/auth", authRoutes);
+        app.use("/api/timeslots", timeSlotRoutes);
 
         app.listen(process.env.PORT, ()=>{
         console.log("Server started");
