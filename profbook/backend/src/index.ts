@@ -4,6 +4,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import authRoutes from "./routes/authRoutes";
 import timeSlotRoutes from "./routes/timeSlotRoutes";
+import appointmentRoutes from "./routes/appointmentRoutes";
 
 
 const app=express();
@@ -20,6 +21,7 @@ async function server() {
         })
         app.use("/api/auth", authRoutes);
         app.use("/api/timeslots", timeSlotRoutes);
+        app.use("/api/appointments", appointmentRoutes);
 
         app.listen(process.env.PORT, ()=>{
         console.log("Server started");
