@@ -1,4 +1,4 @@
-import getBookings from "../api/bookingApi";
+import { getBookings , cancelbookings } from "../api/bookingApi";
 import { useState, useEffect } from "react";
 import BookingForm from "../components/BookingForm";
 
@@ -11,6 +11,18 @@ const fetchData=async () => {
     useEffect(() => {
         fetchData();
     },[] );
+
+    const handleCancel = async (id: number) => {
+      try{
+        await cancelbookings(id);
+        alert("Booking Canceled");
+        await fetchData();
+      }
+      catch(error){
+        console.log(error);
+      }
+      
+    }
     
     return (
         <>
@@ -19,7 +31,10 @@ const fetchData=async () => {
             <div key={booking.id}>
               <p>Name : {booking.customer_name}</p>
               <p>Status: {booking.status}</p>
-            </div>
+          <button onClick={() => handleCancel(booking.id)}>
+          Cancel
+          </button>
+          </div>
           ))}
         </>
     );

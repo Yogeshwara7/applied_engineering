@@ -19,7 +19,17 @@ async function initDB() {
             updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
             ON UPDATE CURRENT_TIMESTAMP
             )
-        `)
+        `);
+
+        await db.query(`
+        ALTER TABLE bookings 
+        MODIFY status ENUM(
+            'Pending','Accepted','Completed','Rejected','Cancelled'
+        ) NOT NULL DEFAULT 'Pending'
+        `);
+
+        console.log("DB ready");
+
     }
     catch(error){
         console.error("DB Initialization failed:", error);

@@ -44,11 +44,30 @@ export const getbookings= async (req:Request , res:Response)=>{
     try{
 
         const [rows] = await pool.execute(
-            `SELECT * FROM bookings ORDER BY created_at DESC`
+            `SELECT * FROM bookings WHERE status = "pending" ORDER BY created_at DESC `
         );
        res.status(200).json(rows)
     }
     catch(error){
         res.status(500).json({error:"Internal error occured"});
+    }
+}
+
+export const cancelbookings=async (req:Request , res:Response)=>{
+    try{
+        const bookingId = req.params.id;
+        if(!bookingId){
+            return res.status(404).json({message:"Not Found"});
+        }
+
+        await pool.execute(
+            "UPDATE bookings SET status = 'Cancelled' WHERE id = ?",
+            [bookingId]
+        );
+
+        res.status(200).json({message:"Booking Canceled"});
+    }
+    catch(error){
+        res.status(500).json({error:"error.message"});
     }
 }

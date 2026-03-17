@@ -5,14 +5,16 @@ const Api = axios.create({
 });
 
 export const getBookings = async () => {
-    const response = await Api.get("/api/booking");
+    const response = await Api.get(`/api/booking`);
     return response.data;
 };
-
-// also provide a default export for convenience
-export default getBookings;
 
 export const createBooking = async (data: any) => {
-    const response = await Api.post("/api/booking", data);
-    return response.data;
+const response = await Api.post(`/api/booking`, data);
+return response.data;
 };
+
+export const cancelbookings = async(id: number)=>{
+    const response = await Api.put(`api/booking/cancel/${id}`);
+    return response.data;
+}
